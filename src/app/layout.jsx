@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
             <SignedIn>
               <div className="flex gap-3 text-[14px] justify-center items-center">
                 <Link href={"/blog"}>Blogs</Link>
+                <Link href={"/add-forms"}>Add form</Link>
                 <UserButton showName />
               </div>
             </SignedIn>
