@@ -26,7 +26,8 @@ const Page = async () => {
       {data.blogs.map((blog) => (
         <Link key={blog.id} href={`/blog-post/${blog.slug}`}>
           <div className="border rounded-lg flex max-md:flex-col space-x-5 ">
-            <div className="max-w-[350px] max-md:w-full bg-green-100">
+            ehllo
+            {/* <div className="max-w-[350px] max-md:w-full bg-green-100">
               <img
                 src={`${BLOG_IMAGE_PREFIX}/${blog.image}`}
                 alt="ID"
@@ -35,7 +36,7 @@ const Page = async () => {
             </div>
             <div>
               <p className="h1 px-5">{blog.title}</p>
-            </div>
+            </div> */}
           </div>
         </Link>
       ))}

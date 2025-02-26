@@ -1,0 +1,173 @@
+Great! I'll teach you RegEx from **basic to advanced** with explanations and exercises. 🚀  
+
+---
+
+## **What is RegEx?**  
+Regular Expressions (**RegEx**) are patterns used to match **text, numbers, symbols, or specific patterns** in a string.  
+
+**Example:**  
+- Find all numbers: `/\d+/`
+- Extract email addresses: `/\w+@\w+\.\w+/`
+- Replace spaces with dashes: `.replace(/\s+/g, "-")`
+
+---
+
+## **Step 1: Basic RegEx Patterns**  
+### **1.1 Matching Characters**
+
+| Pattern  | Meaning | Example Match |
+|----------|---------|--------------|
+| `a` | Matches the letter `a` | `"apple"` → ✅ `"a"` matches |
+| `abc` | Matches `"abc"` exactly | `"abc123"` → ✅ `"abc"` matches |
+| `.` | Matches any **single** character | `"cat"` → ✅ `"c.t"` matches `"cat"` |
+
+
+#### **Exercise 1:**  
+👉 **Match the word "hello" in a sentence.**  
+```js
+let text = "hello world!";
+let regex = /hello/;
+console.log(text.match(regex)); // Expected output: ["hello"]
+```
+✅ **Practice:** Try different words.
+
+---
+
+### **1.2 Special Characters**
+| Symbol | Meaning | Example |
+|--------|---------|---------|
+| `\d` | Matches any **digit (0-9)** | `"age 25"` → ✅ Matches `"2"` and `"5"` |
+| `\w` | Matches any **word character** (A-Z, a-z, 0-9, _) | `"hello_123"` → ✅ Matches `"hello"`, `"123"` |
+| `\s` | Matches any **whitespace** (spaces, tabs, new lines) | `"hello world"` → ✅ Matches the space |
+| `\D` | Matches **non-digit** characters | `"abc123"` → ✅ `"abc"` |
+| `\W` | Matches **non-word** characters | `"hello!"` → ✅ `"!"` |
+| `\S` | Matches **non-whitespace** characters | `"hello world"` → ✅ `"hello"` and `"world"` |
+
+#### **Exercise 2:**  
+👉 **Extract numbers from a string.**  
+```js
+let text = "Order ID: 24567";
+let regex = /\d+/;
+console.log(text.match(regex)); // Expected output: ["24567"]
+```
+✅ **Practice:** Try matching only letters using `\w+`.
+
+---
+
+### **1.3 Anchors (`^` and `$`)**  
+| Symbol | Meaning | Example |
+|--------|---------|---------|
+| `^` | Matches **start of a string** | `/^Hello/` matches `"Hello world"`, but not `"world Hello"` |
+| `$` | Matches **end of a string** | `/world$/` matches `"Hello world"`, but not `"world Hello"` |
+
+#### **Exercise 3:**  
+👉 **Check if a string starts with "Hello".**  
+```js
+let text = "Hello, my friend!";
+let regex = /^Hello/;
+console.log(regex.test(text)); // Expected output: true
+```
+✅ **Practice:** Try checking if a string **ends with** `"friend!"`.
+
+---
+
+## **Step 2: Quantifiers (How Many Times a Pattern Appears)**
+| Symbol | Meaning | Example |
+|--------|---------|---------|
+| `+` | **One or more** occurrences | `"abc123"` → `/\d+/` matches `"123"` |
+| `*` | **Zero or more** occurrences | `"aaa"` → `/a*/` matches `"aaa"` |
+| `?` | **Zero or one** occurrence (optional) | `"color"` → `/colou?r/` matches `"color"` & `"colour"` |
+| `{n}` | **Exactly `n` times** | `"1234"` → `/\d{3}/` matches `"123"` |
+| `{n,}` | **At least `n` times** | `"1234"` → `/\d{2,}/` matches `"1234"` |
+| `{n,m}` | **Between `n` and `m` times** | `"1234"` → `/\d{2,3}/` matches `"123"` |
+
+#### **Exercise 4:**  
+👉 **Match exactly 3-letter words.**  
+```js
+let text = "The cat ran.";
+let regex = /\b\w{3}\b/g; // \b is word boundary
+console.log(text.match(regex)); // Expected output: ["The", "cat", "ran"]
+```
+✅ **Practice:** Modify `{3}` to `{4}` and see what happens.
+
+---
+
+## **Step 3: Groups & Alternations**
+### **3.1 Capturing Groups `()`**
+| Pattern | Meaning | Example |
+|---------|---------|---------|
+| `(abc)` | Captures `"abc"` | `"abc123"` → `/(abc)/` captures `"abc"` |
+| `(\d{3})-(\d{2})-(\d{4})` | Captures a phone number format | `"123-45-6789"` |
+
+#### **Exercise 5:**  
+👉 **Extract the year from a date.**  
+```js
+let date = "Born in 1998.";
+let regex = /(\d{4})/;
+console.log(date.match(regex)[1]); // Expected output: "1998"
+```
+✅ **Practice:** Modify it to extract the day & month from `12/25/2024`.
+
+---
+
+### **3.2 Alternation `|` (OR)**
+| Pattern | Meaning | Example |
+|---------|---------|---------|
+| `cat|dog` | Matches `"cat"` or `"dog"` | `"I have a cat"` → ✅ Matches `"cat"` |
+
+#### **Exercise 6:**  
+👉 **Find if a sentence contains "car" or "bike".**  
+
+```js
+let text = "I love my bike.";
+let regex = /car|bike/;
+console.log(text.match(regex)); // Expected output: "bike"
+```
+
+✅ **Practice:** Add `"bus"` to the pattern.
+
+---
+
+## **Step 4: Lookaheads & Lookbehinds (Advanced)**
+### **4.1 Lookaheads (`?=` and `?!`)**
+| Pattern | Meaning | Example |
+|---------|---------|---------|
+| `\d+(?=kg)` | Match **only numbers** before `"kg"` | `"50kg"` → ✅ Matches `"50"` |
+| `\d+(?!kg)` | Match numbers **not** followed by `"kg"` | `"50g"` → ✅ Matches `"50"` |
+
+#### **Exercise 7:**  
+👉 **Extract numbers only if followed by "kg".**  
+```js
+let text = "50kg 100g 25kg";
+let regex = /\d+(?=kg)/g;
+console.log(text.match(regex)); // Expected output: ["50", "25"]
+```
+✅ **Practice:** Try `\d+(?!g)` to get numbers **not followed by "g"**.
+
+---
+
+## **Final Challenge 🚀**
+### **Extract all email addresses from a text.**
+👉 **Write a RegEx pattern that matches emails.**  
+```js
+let text = "Contact me at ashish@example.com or support@company.net.";
+let regex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
+console.log(text.match(regex)); 
+// Expected output: ["ashish@example.com", "support@company.net"]
+```
+
+---
+
+## **What’s Next?**
+- ✅ **Practice on [regex101.com](https://regex101.com/)**
+- ✅ **Try modifying patterns**
+- ✅ **Use RegEx in real-world projects (form validation, URL cleaning, log parsing, etc.)**
+
+Do you want **more exercises or a project-based approach** next? 🚀
+
+
+
+
+export default ({ children }) => (
+  <div className="prose max-w-none"> {children} </div>
+);
