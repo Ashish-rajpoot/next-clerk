@@ -13,7 +13,12 @@ const nextConfig = withMdx({
   // Support MDX files as pages:
   pageExtensions: ["md", "mdx", "tsx", "ts", "jsx", "js"],
   images: {
-    domains: ["i.postimg.cc"], // Add external image domain
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+      },
+    ],
   },
 });
 
